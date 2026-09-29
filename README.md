@@ -1,5 +1,7 @@
 # Run Reflection
 
+[![tests](https://github.com/evgeniyarbatov/run-reflection/actions/workflows/tests.yml/badge.svg)](https://github.com/evgeniyarbatov/run-reflection/actions/workflows/tests.yml)
+
 Enrich the experience of running — surface dimensions of a run that consciousness misses, forgets, or smooths over.
 
 Each run becomes a private reflection: multiple perspectives that disagree, tensions between them, and one line to carry.
