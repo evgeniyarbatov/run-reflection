@@ -37,6 +37,7 @@ run: all
 
 install:
 	@mkdir -p $(DATA_DIR)/raw $(DATA_DIR)/activities $(JOURNAL_DIR)
+	@command -v osmconvert >/dev/null || brew install osmfilter
 	@uv sync --dev
 
 city:

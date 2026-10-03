@@ -53,7 +53,7 @@ See [terraform/README.md](../terraform/README.md) for Lambda schedule and Dynamo
 
 ## City OSM data
 
-POI enrichment needs a clipped city extract. Install `wget`, `osmconvert`, and `osmium`, then set `BOUNDARY_POLY` in the `Makefile` to your city's polygon in `osm/`:
+POI enrichment needs a clipped city extract. Install `wget` and `osmium` (`make install` installs `osmconvert`), then set `BOUNDARY_POLY` in the `Makefile` to your city's polygon in `osm/`:
 
 ```bash
 make country   # downloads vietnam-latest.osm.pbf (or change OSM_URL)
