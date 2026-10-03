@@ -25,10 +25,10 @@ variable "morning_lambda_schedule" {
 
 variable "latitude" {
   type    = number
-  default = 10.790609897658006
+  default = 10.77146093421298
 }
 
 variable "longitude" {
   type    = number
-  default = 106.6885402030355
+  default = 106.69823735664274
 }
