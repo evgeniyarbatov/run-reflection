@@ -64,7 +64,7 @@ test: install
 	@uv run python -m pytest
 
 deploy: test
-	@cd $(TERRAFORM_DIR) && terraform apply -auto-approve
+	@cd $(TERRAFORM_DIR) && terraform init -input=false && terraform apply -auto-approve
 
 lock:
 	@uv lock
