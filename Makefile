@@ -37,10 +37,12 @@ run: all
 
 install:
 	@mkdir -p $(DATA_DIR)/raw $(DATA_DIR)/activities $(JOURNAL_DIR)
-	@command -v osmconvert >/dev/null || brew install osmfilter
 	@uv sync --dev
 
-city:
+system-deps:
+	@command -v osmconvert >/dev/null || brew install osmfilter
+
+city: system-deps
 	@osmconvert $(OSM_DIR)/$(COUNTRY_OSM_FILE) -B=$(BOUNDARY_POLY) -o=$(OSM_DIR)/city.osm.pbf
 	@osmium cat --overwrite $(OSM_DIR)/city.osm.pbf -o $(OSM_DIR)/city.osm
 
@@ -83,10 +85,11 @@ help:
 	@echo "analyze      - enrichment pipeline only"
 	@echo "reflect      - analyze + journal reflection"
 	@echo "install      - uv sync --dev"
+	@echo "system-deps  - brew install osmfilter (osmconvert) if missing"
 	@echo "city         - build city OSM extract from country extract"
 	@echo "test         - run pytest"
 	@echo "deploy       - test + terraform apply"
 	@echo "lock         - refresh uv.lock"
 	@echo "clean        - remove untracked .gpx/.json/.md and .venv"
 
-.PHONY: all install city analyze reflect test deploy lock clean help
+.PHONY: all install system-deps city analyze reflect test deploy lock clean help
