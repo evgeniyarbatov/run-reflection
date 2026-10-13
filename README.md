@@ -10,12 +10,6 @@ Each run becomes a private reflection: multiple perspectives that disagree, tens
 >
 > **Contrarian:** You will call this an easy morning; the duration says otherwise.
 
-## Status
-
-| Folder | Status | Last touched | Next step |
-|---|---|---|---|
-| root | active | 2026-10-06 | — |
-
 ## Quick start
 
 ```bash
