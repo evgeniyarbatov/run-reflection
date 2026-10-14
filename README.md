@@ -14,7 +14,7 @@ Each run becomes a private reflection: multiple perspectives that disagree, tens
 
 ```bash
 # one-time (see docs/setup.md)
-make install
+make setup
 make country && make city
 
 # every run
@@ -42,7 +42,7 @@ First-time setup also needs Ollama models, AWS/Terraform for weather/traffic con
 | `make` | Full pipeline: GPX → journal |
 | `make analyze` | Enrichment only (`$DATA_DIR/activities/`) |
 | `make reflect` | Analyze + journal reflection |
-| `make install` | Create venv and install dependencies |
+| `make setup` | Create venv and install dependencies |
 | `make country` / `make city` | One-time OSM setup |
 | `make test` | Run pytest |
 | `make deploy` | Run tests, then `terraform apply` |

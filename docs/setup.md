@@ -3,7 +3,7 @@
 ## Python
 
 ```bash
-make install
+make setup
 ```
 
 Creates `.venv/` via `uv sync --dev`. Scripts run from the repo root as `uv run python -m scripts.<module>` (or via `make`).
@@ -53,7 +53,7 @@ See [terraform/README.md](../terraform/README.md) for Lambda schedule and Dynamo
 
 ## City OSM data
 
-POI enrichment needs a clipped city extract. Install `wget` and `osmium` (`make install` installs `osmconvert`), then set `BOUNDARY_POLY` in the `Makefile` to your city's polygon in `osm/`:
+POI enrichment needs a clipped city extract. Install `wget` and `osmium` (`make setup` installs `osmconvert`), then set `BOUNDARY_POLY` in the `Makefile` to your city's polygon in `osm/`:
 
 ```bash
 make country   # downloads vietnam-latest.osm.pbf (or change OSM_URL)

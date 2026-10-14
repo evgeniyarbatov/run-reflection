@@ -30,12 +30,12 @@ endif
 
 TERRAFORM_DIR = terraform
 
-.DEFAULT_GOAL := run
+.DEFAULT_GOAL := help
 
 # Entry point: analyze + reflect.
 run: all
 
-install:
+setup:
 	@mkdir -p $(DATA_DIR)/raw $(DATA_DIR)/activities $(JOURNAL_DIR)
 	@uv sync --dev
 
@@ -47,7 +47,7 @@ city: system-deps
 	@osmium cat --overwrite $(OSM_DIR)/city.osm.pbf -o $(OSM_DIR)/city.osm
 
 # Enrichment only (GPX → DATA_DIR/activities). Idempotent; scripts skip existing fields.
-analyze: install
+analyze: setup
 	@uv run python -m scripts.activity
 	@uv run python -m scripts.weather_traffic
 	@uv run python -m scripts.uniqueness
@@ -60,7 +60,7 @@ reflect: analyze
 
 all: reflect
 
-test: install
+test: setup
 	@uv run python -m pytest
 
 deploy: test
@@ -69,27 +69,16 @@ deploy: test
 lock:
 	@uv lock
 
-# Drop generated .gpx/.json/.md not tracked by git; keep committed samples and docs.
-clean:
-	@find . -type f \( -name '*.gpx' -o -name '*.json' -o -name '*.md' \) \
-		! -path './.git/*' ! -path './.venv/*' \
-		! -path './.mypy_cache/*' ! -path './.pytest_cache/*' ! -path './.ruff_cache/*' \
-		| sed 's|^\./||' \
-		| while IFS= read -r f; do \
-			git ls-files --error-unmatch "$$f" >/dev/null 2>&1 || rm -f "$$f"; \
-		done
-	rm -rf .venv
-
 help:
+	@echo "run          - analyze + reflect"
 	@echo "make         - drop GPX in $(DATA_DIR)/raw, then this (analyze + reflect → $(JOURNAL_DIR))"
 	@echo "analyze      - enrichment pipeline only"
 	@echo "reflect      - analyze + journal reflection"
-	@echo "install      - uv sync --dev"
+	@echo "setup        - uv sync --dev"
 	@echo "system-deps  - brew install osmfilter (osmconvert) if missing"
 	@echo "city         - build city OSM extract from country extract"
 	@echo "test         - run pytest"
 	@echo "deploy       - test + terraform apply"
 	@echo "lock         - refresh uv.lock"
-	@echo "clean        - remove untracked .gpx/.json/.md and .venv"
 
-.PHONY: all install system-deps city analyze reflect test deploy lock clean help
+.PHONY: all setup system-deps city analyze reflect test deploy lock help

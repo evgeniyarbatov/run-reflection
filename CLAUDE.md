@@ -38,7 +38,7 @@ One-time OSM setup: `make country && make city`. Override city: `make city BOUND
 
 ## Python environment
 
-- Python 3.12, virtual env at `.venv/` via `uv` (`make install` / `uv sync --dev`)
+- Python 3.12, virtual env at `.venv/` via `uv` (`make setup` / `uv sync --dev`)
 - Dependencies in `pyproject.toml` / `uv.lock`
 - Tests: `make test` (pytest in `tests/`)
 
